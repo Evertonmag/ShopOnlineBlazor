@@ -1,0 +1,54 @@
+﻿@implements IDisposable
+@inject IShoppingCartService shoppingCartService
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href=""><i class="fa-solid fa-cart-shopping"></i> ShopOnlineMudBlazor</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <MudNavLink Href="" IconColor="Color.Inherit" Icon="oi oi-home">Home</MudNavLink>
+
+            <ProductCategoriesNavMenu />
+
+            <div class="d-sm-none">
+                <MudNavLink Href="ShoppingCart" IconColor="Color.Inherit" Icon="fa-solid fa-cart-shopping">&nbsp; Shopping Cart (<b>@shoppingCartItemCount</b>)</MudNavLink>
+            </div>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private int shoppingCartItemCount = 0;
+
+    protected override void OnInitialized()
+    {
+        shoppingCartService.OnShoppingCartChanged += ShoppingCartChanged;
+    }
+
+    protected void ShoppingCartChanged(int totalQty)
+    {
+        shoppingCartItemCount = totalQty;
+        StateHasChanged();
+    }
+
+    void IDisposable.Dispose()
+    {
+        shoppingCartService.OnShoppingCartChanged -= ShoppingCartChanged;
+    }
+}

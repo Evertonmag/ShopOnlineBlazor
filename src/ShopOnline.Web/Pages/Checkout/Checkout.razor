@@ -1,0 +1,57 @@
+﻿@page "/Checkout"
+@inherits CheckoutBase
+
+<h3 class="mb-4">Checkout</h3>
+
+@if (ShoppingCartItems == null)
+{
+    <DisplaySpinner />
+}
+else
+{
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="mb-4">Payment Methods</h4>
+            <div class="row justify-content-center">
+                <a class="btn btn-outline-info mb-3 w-75 pt-3"><h4>Pix</h4></a>
+                <a class="btn btn-outline-info mb-3 w-75 pt-3"><h4>Debit or credit Card</h4></a>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <h4>Paymment Summary</h4>
+            @if (ShoppingCartItems.Count() > 0)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Product</th>
+                            <th>Price</th>
+                            <th>SubTotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ShoppingCartItems)
+                        {
+                            <tr>
+                                <td><img src="@item.ProductImageUrl" width="100" /></td>
+                                <td>@item.Qty x @item.ProductName</td>
+                                <td>@item.Price.ToString("C")</td>
+                                <td>@((item.Price * item.Qty).ToString("C"))</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="3"><b>Total</b></td>
+                            <td><b>@TotalPrice</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>You currently have no items in your shopping Cart</p>
+            }
+        </div>
+    </div>
+}
