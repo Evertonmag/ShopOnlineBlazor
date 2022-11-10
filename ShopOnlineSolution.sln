@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopOnline.Models", "src\Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnline.Web", "src\ShopOnline.Web\ShopOnline.Web.csproj", "{8FBFF794-F286-4C68-93F4-F2F8CBBE0FAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnlineMudBlazor.Web", "ShopOnlineMudBlazor.Web\ShopOnlineMudBlazor.Web.csproj", "{BFE666B9-B67A-43A3-9016-F45E2764B26C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8FBFF794-F286-4C68-93F4-F2F8CBBE0FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FBFF794-F286-4C68-93F4-F2F8CBBE0FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FBFF794-F286-4C68-93F4-F2F8CBBE0FAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFE666B9-B67A-43A3-9016-F45E2764B26C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFE666B9-B67A-43A3-9016-F45E2764B26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFE666B9-B67A-43A3-9016-F45E2764B26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFE666B9-B67A-43A3-9016-F45E2764B26C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

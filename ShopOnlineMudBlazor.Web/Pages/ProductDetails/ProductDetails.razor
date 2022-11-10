@@ -1,0 +1,35 @@
+﻿@page "/ProductDetails/{id:int}"
+@inherits ProductDetailsBase
+
+@if (Product == null && ErrorMessage == null)
+{
+    <DisplaySpinner />
+}
+else if (ErrorMessage != null)
+{
+    <DisplayError ErrorMessage="@ErrorMessage"></DisplayError>
+}
+else
+{
+    <MudText Typo="Typo.h4" Class="mb-5">Product details</MudText>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <MudImage ObjectFit="ObjectFit.ScaleDown" Fluid="true" Width="800" Src="@Product.ImageUrl" />
+        </div>
+        <MudCard Class="col-md-6" Outlined="true" Style="border: none;" >
+            <MudCardContent>
+                <MudText Typo="Typo.h4">@Product.Name</MudText>
+                &nbsp;
+                <MudText Typo="Typo.body1" Class="mb-3">@Product.Description</MudText>
+                <MudText Typo="Typo.body1"><b>@Product.Price.ToString("C")&nbsp;(@Product.Qty items in stock)</b></MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Success" @onclick="() => (AddToCart(new CartItemToAddDto{
+                        CartId = HardCoded.CartId,
+                        ProductId = Product.Id,
+                        Qty = 1
+                    }))"><b>Add to Cart</b></MudButton>
+            </MudCardActions>
+        </MudCard>
+    </div>
+}

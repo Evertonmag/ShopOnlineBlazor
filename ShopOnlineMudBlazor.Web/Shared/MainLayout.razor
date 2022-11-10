@@ -1,0 +1,45 @@
+﻿@implements IDisposable
+@inject IShoppingCartService shoppingCartService
+@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <MudButton Href="ShoppingCart" Variant="Variant.Filled" Color="Color.Info">
+                <i class="fa-solid fa-cart-shopping"></i>&nbsp;Cart
+                <span class="badge bg-dark">@shoppingCartItemCount</span>
+            </MudButton>
+            <MudThemeProvider />
+            <MudDialogProvider />
+            <MudSnackbarProvider />
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    private int shoppingCartItemCount = 0;
+
+    protected override void OnInitialized()
+    {
+        shoppingCartService.OnShoppingCartChanged += ShoppingCartChanged;
+    }
+
+    protected void ShoppingCartChanged(int totalQty)
+    {
+        shoppingCartItemCount = totalQty;
+        StateHasChanged();
+    }
+
+    void IDisposable.Dispose()
+    {
+        shoppingCartService.OnShoppingCartChanged -= ShoppingCartChanged;
+    }
+}
