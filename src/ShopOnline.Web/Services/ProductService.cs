@@ -41,7 +41,7 @@ namespace ShopOnline.Web.Services
                 throw;
             }
         }
-
+         
         public async Task<IEnumerable<ProductDto>> GetItems()
         {
             try

@@ -24,7 +24,7 @@ else
                 <MudText Typo="Typo.body1"><b>@Product.Price.ToString("C")&nbsp;(@Product.Qty items in stock)</b></MudText>
             </MudCardContent>
             <MudCardActions>
-                <MudButton Variant="Variant.Filled" Color="Color.Success" @onclick="() => (AddToCart(new CartItemToAddDto{
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => (AddToCart(new CartItemToAddDto{
                         CartId = HardCoded.CartId,
                         ProductId = Product.Id,
                         Qty = 1

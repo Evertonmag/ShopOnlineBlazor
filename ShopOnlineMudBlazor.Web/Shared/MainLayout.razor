@@ -2,27 +2,47 @@
 @inject IShoppingCartService shoppingCartService
 @inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
 
-    <main>
-        <div class="top-row px-4">
-            <MudButton Href="ShoppingCart" Variant="Variant.Filled" Color="Color.Info">
-                <i class="fa-solid fa-cart-shopping"></i>&nbsp;Cart
-                <span class="badge bg-dark">@shoppingCartItemCount</span>
-            </MudButton>
-            <MudThemeProvider />
-            <MudDialogProvider />
-            <MudSnackbarProvider />
-        </div>
+<MudLayout>
+    <MudAppBar>
+        <MudLink Href="/" Class="d-flex me-4" Style="align-items: center;">
+            <MudIcon Icon="@Icons.Filled.ShoppingCart" Style="color: #FFF;" />&nbsp;
+            <MudText Typo="Typo.h6" Style="color: #FFF;">Shop Online</MudText>
+        </MudLink>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+        <MudButton Class="navbar-toggler" @onclick="ToggleNavMenu">
+            <MudIcon Icon="@Icons.Rounded.Menu" Style="color: #FFF;"></MudIcon>
+        </MudButton>
+        <MudButton Href="ShoppingCart" Variant="Variant.Filled" Style="margin-left: auto; margin-right: 0px;" Color="Color.Info">
+            <MudIcon Icon="@Icons.Filled.ShoppingCart" Color="Color.Inherit" />&nbsp;
+            <MudText Class="badge bg-dark">Cart (@shoppingCartItemCount)</MudText>
+        </MudButton>
+    </MudAppBar>
+
+    <MudDrawer Color="Color.Primary" Open="collapseNavMenu" ClipMode="DrawerClipMode.Docked">
+        @*<MudDrawerHeader>
+        <MudLink Href="/">
+        <MudIcon Icon="@Icons.Filled.ShoppingCart" />
+        <MudText Typo="Typo.h6">ShopOnlineMudBlazor</MudText>
+        </MudLink>
+        </MudDrawerHeader>*@
+        <MudNavMenu>
+            <MudNavLink Href="/" @onclick="ToggleNavMenu" IconColor="Color.Inherit" Icon="@Icons.Filled.Home">Home</MudNavLink>
+            <ProductCategoriesNavMenu />
+            <MudPaper Class="d-sm-none">
+                <MudNavLink Href="ShoppingCart" @onclick="ToggleNavMenu" IconColor="Color.Inherit" Icon="fa-solid fa-cart-shopping">&nbsp; Shopping Cart (<b>@shoppingCartItemCount</b>)</MudNavLink>
+            </MudPaper>
+        </MudNavMenu>
+    </MudDrawer>
+
+    <MudMainContent Style="padding-top:100px;">
+        @Body
+    </MudMainContent>
+</MudLayout>
+
 
 @code {
     private int shoppingCartItemCount = 0;
@@ -41,5 +61,14 @@
     void IDisposable.Dispose()
     {
         shoppingCartService.OnShoppingCartChanged -= ShoppingCartChanged;
+    }
+
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
     }
 }

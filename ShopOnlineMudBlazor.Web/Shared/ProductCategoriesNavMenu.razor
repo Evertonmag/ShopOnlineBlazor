@@ -15,7 +15,7 @@ else
         var link = $"/ProductsByCategory/{productCategory.Id}";
 
         <MudNavMenu>
-            <MudNavLink Href="@link" IconColor="Color.Inherit" Icon="@productCategory.IconCSS">@productCategory.Name</MudNavLink>
+            <MudNavLink Href="@link" Icon="@productCategory.IconCSS" Style="color:#FFF;">@productCategory.Name</MudNavLink>
         </MudNavMenu>
     }
 }

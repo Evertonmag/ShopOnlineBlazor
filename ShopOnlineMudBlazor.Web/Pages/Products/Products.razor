@@ -7,22 +7,21 @@
 }
 else
 {
-    <h3 class="mb-5">Products</h3>
+    <MudText Typo="Typo.h5">Products</MudText>
 
-    var productCount = Products.Count();
-
-    @if (productCount > 0)
+    @if (Products.Count() > 0)
     {
-        @foreach (var prodGroup in GetGroupedProductsByCategory())
-        {
-            <h4>@GetCategoryName(prodGroup)</h4>
-            <div class="row mt-3">
+        <MudGrid>
+            @foreach (var prodGroup in GetGroupedProductsByCategory())
+            {
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h4">@GetCategoryName(prodGroup)</MudText>
+                </MudItem>
+
                 <DisplayProducts Products="@prodGroup.Take(4)"></DisplayProducts>
-            </div>
 
-            <hr class="mb-3"/>
-        }
-
-
+                <hr class="mb-3" />
+            }
+        </MudGrid>
     }
 }

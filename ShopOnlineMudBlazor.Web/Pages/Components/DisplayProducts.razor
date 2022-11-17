@@ -1,19 +1,17 @@
 ﻿@inherits DisplayProductsBase
 
+
 @foreach (var item in Products)
 {
-    <div class="col-md-3 md-2">
-        <a href="/ProductDetails/@item.Id" style="text-decoration: none;">
-            <MudCard Outlined="false">
-                <MudImage ObjectFit="ObjectFit.ScaleDown" Fluid="true" Width="300" Height="200" Src="@item.ImageUrl" Style="padding: 5px;" />
-                <MudCardContent >
-                    <MudText Typo="Typo.h5" Style="margin-bottom: 10px;">@item.Name</MudText>
-                    <MudText Typo="Typo.body2"><b>@item.Price.ToString("C")</b></MudText>
+    <MudItem xs="3">
+        <MudLink Href="@($"/ProductDetails/{item.Id}")" Style="text-decoration: none;">
+            <MudImage Src="@item.ImageUrl" Height="150" Width="250" Style="margin:0px;" Fluid="true"></MudImage>
+            <MudCard Style="margin:0px;">
+                <MudCardContent Style="margin:0px;">
+                    <MudText Typo="Typo.h5" Style="margin:0px;">@item.Name</MudText>
+                    <MudText Typo="Typo.body2" Style="margin:0px;">@item.Price.ToString("C")</MudText>
                 </MudCardContent>
             </MudCard>
-        </a>
-    </div>
-    
+        </MudLink>
+    </MudItem>
 }
-
-
